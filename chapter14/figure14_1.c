@@ -29,8 +29,10 @@ connect_timeo(int sockfd, const struct sockaddr *saptr, socklen_t salen, int nse
 		}
 	}
 
+	// turn off the alarm
 	alarm(0);
 
+	// restore previous signal handler
 	signal(SIGALRM, sigfunc);
 
 	return (n);
