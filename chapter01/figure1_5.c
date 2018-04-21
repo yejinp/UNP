@@ -20,7 +20,8 @@ main(int argc, char *argv[])
 
 	if(argc != 2)
 	{
-		printf("usage: a.out <IPaddress>");
+		printf("%s: a.out <IPaddress> \n", argv[0]);
+		exit(6);
 	}
 
 	if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {

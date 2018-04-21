@@ -1,3 +1,8 @@
+#include <pthread.h>
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 void
 Pthread_mutex_lock(pthread_mutex_t *mptr)
 {
