@@ -1,0 +1,15 @@
+CC=gcc
+CFLAGS=-g
+
+TARGET=figure3_1 figure3_3 figure3_4
+all:$(TARGET);
+
+figure3_1:figure3_1.o
+	$(CC) $(CFLAGS) -o $@ $^
+figure3_3:figure3_3.o
+	$(CC) $(CFLAGS) -o $@ $^
+figure3_4:figure3_4.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+clean:
+	rm -f $(TARGET) *.o
