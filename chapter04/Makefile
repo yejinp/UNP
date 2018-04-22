@@ -5,7 +5,7 @@ CFLAG=-g
 CCFLAG=-c
 
 OBJECTS=figure4_9.o
-OBJECTS=figure4_19.o
+OBJECTS+=figure4_19.o
 
 TARGET=getpeername
 TARGET+=getsockname
