@@ -8,8 +8,12 @@ OBJECTS=figure4_9.o
 
 TARGET=getpeername
 TARGET+=getsockname
+TARGET+=figure4_11
 
 all:$(TARGET) $(OBJECTS);
+
+figure4_11:figure4_11.c
+	$(CC) $(CFLAG)  $^ -o $@
 
 getpeername:getpeername.c
 	$(CC) $(CFLAG)  $^ -o $@
