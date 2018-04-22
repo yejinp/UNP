@@ -4,6 +4,8 @@ CFLAGS=-g
 OBJECTS=figure3_12.o
 OBJECTS+=figure3_15.o
 OBJECTS+=figure3_16.o
+OBJECTS+=figure3_17.o
+OBJECTS+=figure3_18.o
 
 TARGET=figure3_1 figure3_3 figure3_4 figure3_5 figure3_10 byte_order byte_operation address_function
 TARGET=figure3_1
@@ -25,6 +27,12 @@ figure3_12.o:figure3_12.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 figure3_16.o:figure3_16.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+figure3_17.o:figure3_17.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+figure3_18.o:figure3_18.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 address_function: address_function.o
