@@ -1,21 +1,30 @@
 CC=gcc
 CFLAGS=-g
 
-TARGET=figure3_1 figure3_3 figure3_4 figure3_5 figure3_10 byte_order byte_operation
+TARGET=figure3_1 figure3_3 figure3_4 figure3_5 figure3_10 byte_order byte_operation address_function
 all:$(TARGET);
+
+address_function: address_function.o
+	$(CC) $(CFLAGS) -o $@ $^
 
 byte_operation: byte_operation.o
 	$(CC) $(CFLAGS) -o $@ $^
+
 byte_order: byte_order.o
 	$(CC) $(CFLAGS) -o $@ $^
+
 figure3_1:figure3_1.o
 	$(CC) $(CFLAGS) -o $@ $^
+
 figure3_3:figure3_3.o
 	$(CC) $(CFLAGS) -o $@ $^
+
 figure3_4:figure3_4.o
 	$(CC) $(CFLAGS) -o $@ $^
+
 figure3_5:figure3_5.o
 	$(CC) $(CFLAGS) -o $@ $^
+
 figure3_10:figure3_10.o
 	$(CC) $(CFLAGS) -o $@ $^
 
