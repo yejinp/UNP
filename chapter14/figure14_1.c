@@ -38,11 +38,6 @@ connect_timeo(int sockfd, const struct sockaddr *saptr, socklen_t salen, int nse
 	return (n);
 }
 
-int
-main()
-{
-}
-
 void connect_alarm(int signo)
 {
 	return;
