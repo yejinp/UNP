@@ -11,42 +11,26 @@
 #define UNIXSTR_PATH	"/tmp/test_path"
 #define MAXLINE		1024
 
-void 
-dg_echo(int sockfd, struct sockaddr *pcliaddr, socklen_t clilen)
-{
-	int	n;
-	socklen_t 	len;
-	char	msg[MAXLINE];
-	len = clilen;
+extern void dg_echo(int, struct sockaddr *, socklen_t);
 
-	for( ; ;) {
-		n = recvfrom(sockfd, msg, MAXLINE, 0, pcliaddr, &len);
-		printf("recvd %d bytes.\n", n);
-		n = sendto(sockfd, msg, n, 0, pcliaddr, len);
-		printf("sendto %d bytes.\n", n);
-	}
-}
-
-int main(int argc, char **argv)
+int
+main(int argc, char **argv) 
 {
 	int	sockfd;
-	struct sockaddr_un servaddr, cliaddr;
+	struct  sockaddr_un	servaddr, cliaddr;
+	
+	sockfd = socket(AF_LOCAL, SOCK_DGRAM, 0);
+	if(sockfd < 0) {
+		perror("socket error");
+		exit(9);
+	}
 
 	unlink(UNIXSTR_PATH);
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sun_family = AF_LOCAL;
 	strcpy(servaddr.sun_path, UNIXSTR_PATH);
 
-	sockfd = socket(AF_LOCAL, SOCK_DGRAM, 0);
-	if(sockfd < 0) {
-		perror("socket failed");
-		exit(9);
-	}
-	if(0 > bind(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr))) {
-		perror("bind failed");
-		exit(8);
-	}
-
-	dg_echo(sockfd, (struct sockaddr *)&cliaddr, sizeof(cliaddr));
+	bind(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
+	
+	dg_echo(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 }
-
