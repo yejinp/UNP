@@ -3,9 +3,11 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <strings.h>
+#include <string.h>
 
 #define MAXLINE 1024
+
+extern int readable_timeo(int, int sec);
 
 void
 dg_cli(FILE *fp, int sockfd, const struct sockaddr *pservaddr, socklen_t servlen)
