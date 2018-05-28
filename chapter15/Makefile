@@ -12,7 +12,7 @@ TARGET+=figure15_10.o
 TARGET+=figure15_11.o
 TARGET+=figure15_12
 TARGET+=figure15_13.o
-TARGET+=figure15_14.o
+#TARGET+=figure15_14.o
 
 all: $(TARGET);
 
