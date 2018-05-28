@@ -12,6 +12,7 @@ TARGET+=figure15_10.o
 TARGET+=figure15_11.o
 TARGET+=figure15_12
 TARGET+=figure15_13.o
+TARGET+=figure15_14.o
 
 all: $(TARGET);
 
@@ -43,6 +44,9 @@ figure15_12:figure15_12.c figure15_13.o
 	$(CC) $^ $(CFLAGS) -o $@
 
 figure15_13.o:figure15_13.c
+	$(CC) $^ $(CFLAGS) -c -o $@
+
+figure15_14.o:figure15_14.c
 	$(CC) $^ $(CFLAGS) -c -o $@
 
 clean:
