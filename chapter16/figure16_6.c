@@ -3,6 +3,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <errno.h>
+#include <string.h>
 
 char *
 gf_time(void)
@@ -20,6 +21,6 @@ gf_time(void)
 	ptr = ctime(&tv.tv_sec);
 	strcpy(str, &ptr[11]);
 
-	snprintf(str + 8, sizeof(str) - 8, ".%06ld", tv.tv_unsec);
+	snprintf(str + 8, sizeof(str) - 8, ".%06ld", tv.tv_usec);
 	return (str);
 }

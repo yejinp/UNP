@@ -4,10 +4,13 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <sys/time.h>
-#include <unistd.h>
 #include <errno.h>
+#include <fcntl.h>
 
 #define	MAXLINE	1024
+
+extern int max(int, int);
+extern char *gf_time();
 
 void
 str_cli(FILE *fp, int sockfd)
@@ -19,13 +22,13 @@ str_cli(FILE *fp, int sockfd)
 	char 	*toiptr, *tooptr, *friptr, *froptr;
 	
 	val = fcntl(sockfd, F_GETFL, 0);
-	fcntl(sockfd, F_SETGF, val | O_NONBLOCK);
+	fcntl(sockfd, F_SETFL, val | O_NONBLOCK);
 
 	val = fcntl(STDOUT_FILENO, F_GETFL, 0);
-	fcntl(STDOUT_FILENO, F_SETGF, val | O_NONBLOCK);
+	fcntl(STDOUT_FILENO, F_SETFL, val | O_NONBLOCK);
 
 	val = fcntl(STDIN_FILENO, F_GETFL, 0);
-	fcntl(STDIN_FILENO, F_SETGF, val | O_NONBLOCK);
+	fcntl(STDIN_FILENO, F_SETFL, val | O_NONBLOCK);
 	
 	toiptr = tooptr = 0;
 	friptr = froptr = 0;
@@ -60,7 +63,7 @@ str_cli(FILE *fp, int sockfd)
 				if(tooptr == toiptr) 
 					shutdown(sockfd, SHUT_WR);
 			} else {
-				fprintf(stderr, "%s: read %s bytes from stdin\n". gf_time(), n);
+				fprintf(stderr, "%s: read %ld bytes from stdin\n", gf_time(), n);
 				toiptr += n;
 				FD_SET(sockfd, &wset);
 			}
@@ -82,7 +85,7 @@ str_cli(FILE *fp, int sockfd)
 				exit(9);
 			}
 		} else {
-			fprintf(stderr, "%s: read %d bytes from socket\n",gf_time(), n);
+			fprintf(stderr, "%s: read %ld bytes from socket\n",gf_time(), n);
 			friptr += n;
 			FD_SET(STDOUT_FILENO, &wset);
 		}
@@ -95,7 +98,7 @@ str_cli(FILE *fp, int sockfd)
 				exit(9);
 			}
 		} else {
-			fprintf(stderr, "%s : wrote %d bytes to stdout\n", gf_time(), nwritten);
+			fprintf(stderr, "%s : wrote %ld bytes to stdout\n", gf_time(), nwritten);
 			if(froptr == friptr)
 				froptr = friptr = fr;
 		}
@@ -109,7 +112,7 @@ str_cli(FILE *fp, int sockfd)
 				exit(9);
 			}
 		} else {
-			fprintf(stderr, "%s : wrote %d bytes to socket\n", gf_time(), nwritten);
+			fprintf(stderr, "%s : wrote %ld bytes to socket\n", gf_time(), nwritten);
 			tooptr += nwritten;
 			if(tooptr == toiptr) {
 				toiptr = tooptr = to;
