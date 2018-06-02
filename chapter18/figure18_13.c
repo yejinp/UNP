@@ -3,8 +3,8 @@
 #include <unistd.h>
 #include <errno.h>
 #include <netinet/udp.h>
-//#include <netinet/ip_var.h>
-#include <netinet/udp_var.h>
+//#include <netinet/ip_var.h> // no file on linux
+#include <netinet/udp_var.h>  // must comment something in this file, 
 #include <sys/param.h>
 #include <sys/sysctl.h>
 #include <sys/socket.h>
